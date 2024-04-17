@@ -75,7 +75,7 @@ class ExampleSidebarX extends StatelessWidget {
           border: Border.all(
             color: actionColor.withOpacity(0.37),
           ),
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             colors: [accentCanvasColor, canvasColor],
           ),
           boxShadow: [
@@ -94,7 +94,7 @@ class ExampleSidebarX extends StatelessWidget {
           size: 20,
         ),
       ),
-      extendedTheme: const SidebarXTheme(
+      extendedTheme: SidebarXTheme(
         width: 230,
         decoration: BoxDecoration(
           color: canvasColor,
@@ -167,7 +167,7 @@ class _ScreensExample extends StatelessWidget {
             return const ComplaintScreen();
           case 4:
             return const PaymentScreen();
-          case 4:
+          case 5:
             return AlertDialog(
               title: const Text('Logout Alert'),
               content: SingleChildScrollView(
@@ -214,7 +214,7 @@ class _ScreensExample extends StatelessWidget {
 }
 
 var primaryColor = mainBtnColor;
-const canvasColor = Color(0XFF3A36DB);
+var canvasColor = mainBtnColor;
 const scaffoldBackgroundColor = Color(0xFF464667);
 const accentCanvasColor = Color(0xFF3E3E61);
 const white = Colors.white;
