@@ -1,0 +1,183 @@
+{
+  "project_info": {
+    "project_number": "927808074565",
+    "project_id": "groom-dab96",
+    "storage_bucket": "groom-dab96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927808074565:android:d5e472fb0d65c3e0fd442c",
+        "android_client_info": {
+          "package_name": "com.example.groom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927808074565-0bs3vqvor9a3mbs671ssnks9vkiv1m4b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.groom",
+            "certificate_hash": "6077915ad5f76b6dc749b6b1238f8d53c7a66db2"
+          }
+        },
+        {
+          "client_id": "927808074565-aud7p47nvusgeg0net9b5jc3ho1n0rbj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHjjhpoTXjiGjtaTLVcDOhh2FEw48wOkA"
+        },
+        {
+          "current_key": "AIzaSyBI2aivuFkSuYRNWsETPqAsJt04dqLctj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "927808074565-aud7p47nvusgeg0net9b5jc3ho1n0rbj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "927808074565-3d8l7magpqvqctn8hv005sg7reenr47d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.groom"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927808074565:android:ac907dfb770d2891fd442c",
+        "android_client_info": {
+          "package_name": "com.example.groom_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927808074565-aud7p47nvusgeg0net9b5jc3ho1n0rbj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHjjhpoTXjiGjtaTLVcDOhh2FEw48wOkA"
+        },
+        {
+          "current_key": "AIzaSyBI2aivuFkSuYRNWsETPqAsJt04dqLctj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "927808074565-aud7p47nvusgeg0net9b5jc3ho1n0rbj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "927808074565-3d8l7magpqvqctn8hv005sg7reenr47d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.groom"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927808074565:android:3fef909d89163d51fd442c",
+        "android_client_info": {
+          "package_name": "com.wegroomyou.groom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927808074565-128273mnummqigbgh4heitp2ebq8vlqc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wegroomyou.groom",
+            "certificate_hash": "87a3b00d3c30dcbe77ebdee3aa47249e087cf694"
+          }
+        },
+        {
+          "client_id": "927808074565-9imnvgbig2n380fsgm58pja5jcdlc0i4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wegroomyou.groom",
+            "certificate_hash": "3d06f5dc89e39b1d05fb5be1922a81580dfd6b5e"
+          }
+        },
+        {
+          "client_id": "927808074565-c0tt3nkmf6foba54jrcq55o5t6r654lj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wegroomyou.groom",
+            "certificate_hash": "ecbe77cb7582e4b3457d576d53b33bf11b12916f"
+          }
+        },
+        {
+          "client_id": "927808074565-iigb7hh1vp2tvlicv5k5s1chqms54uqb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wegroomyou.groom",
+            "certificate_hash": "8f8ba652d526d933ccbf60ef8b051d71318c5127"
+          }
+        },
+        {
+          "client_id": "927808074565-rkmrfngqpm8g3pfpnnjnq1a3ppb0gs83.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wegroomyou.groom",
+            "certificate_hash": "9e10e13e2cf81f9402508686ed8b7bd3b920e39a"
+          }
+        },
+        {
+          "client_id": "927808074565-rlf6f7qp7omb03264b0vmmk0dlkoh4pa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wegroomyou.groom",
+            "certificate_hash": "af0e634e7ee70b4f65419deffe1539e40e9056f0"
+          }
+        },
+        {
+          "client_id": "927808074565-aud7p47nvusgeg0net9b5jc3ho1n0rbj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHjjhpoTXjiGjtaTLVcDOhh2FEw48wOkA"
+        },
+        {
+          "current_key": "AIzaSyBI2aivuFkSuYRNWsETPqAsJt04dqLctj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "927808074565-aud7p47nvusgeg0net9b5jc3ho1n0rbj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "927808074565-3d8l7magpqvqctn8hv005sg7reenr47d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.groom"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
