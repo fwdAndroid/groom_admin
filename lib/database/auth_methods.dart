@@ -1,53 +1,53 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:groom_admin/model/user_model.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-// //Get Users Details
-//   Future<UserModel> getUserDetails() async {
-//     User currentUser = _auth.currentUser!;
-//     DocumentSnapshot documentSnapshot =
-//         await firebaseFirestore.collection('users').doc(currentUser.uid).get();
-//     return UserModel.fromSnap(documentSnapshot);
-//   }
+//Get Users Details
+  Future<UserModel> getUserDetails() async {
+    User currentUser = _auth.currentUser!;
+    DocumentSnapshot documentSnapshot =
+        await firebaseFirestore.collection('users').doc(currentUser.uid).get();
+    return UserModel.fromSnap(documentSnapshot);
+  }
 
-  //Register User with Add User
-  // Future<String> signUpUser(
-  //     {required String email,
-  //     required String confrimPassword,
-  //     required String firstName,
-  //     required String password,
-  //     required String lastName}) async {
-  //   String res = 'Some error occured';
-  //   try {
-  //     if (email.isNotEmpty ||
-  //         password.isNotEmpty ||
-  //         confrimPassword.isNotEmpty ||
-  //         firstName.isNotEmpty) {
-  //       UserCredential cred = await _auth.createUserWithEmailAndPassword(
-  //           email: email, password: password);
+  // Register User with Add User
+  Future<String> signUpUser({
+    required String email,
+    required String confrimPassword,
+    required String firstName,
+    required String password,
+  }) async {
+    String res = 'Some error occured';
+    try {
+      if (email.isNotEmpty ||
+          password.isNotEmpty ||
+          confrimPassword.isNotEmpty ||
+          firstName.isNotEmpty) {
+        UserCredential cred = await _auth.createUserWithEmailAndPassword(
+            email: email, password: password);
 
-  //       //Add User to the database with modal
-  //       UserModel userModel = UserModel(
-  //           firstName: firstName,
-  //           uid: cred.user!.uid,
-  //           email: email,
-  //           password: password,
-  //           lastName: lastName,
-  //           confrimPassword: confrimPassword);
-  //       await firebaseFirestore
-  //           .collection('users')
-  //           .doc(cred.user!.uid)
-  //           .set(userModel.toJson());
-  //       res = 'sucess';
-  //     }
-  //   } catch (e) {
-  //     res = e.toString();
-  //   }
-  //   return res;
-  // }
+        //Add User to the database with modal
+        UserModel userModel = UserModel(
+            firstName: firstName,
+            uid: cred.user!.uid,
+            email: email,
+            password: password,
+            confrimPassword: confrimPassword);
+        await firebaseFirestore
+            .collection('users')
+            .doc(cred.user!.uid)
+            .set(userModel.toJson());
+        res = 'sucess';
+      }
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
+  }
 
   ///Login User with Add Useer
   Future<String> loginUpUser({
