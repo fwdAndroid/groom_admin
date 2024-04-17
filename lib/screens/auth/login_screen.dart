@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:groom_admin/database/auth_methods.dart';
+import 'package:groom_admin/screens/auth/forgot_password.dart';
 import 'package:groom_admin/screens/home_page.dart';
 import 'package:groom_admin/utils/app_colors.dart';
 import 'package:groom_admin/utils/app_style.dart';
 import 'package:groom_admin/utils/buttons.dart';
+import 'package:groom_admin/utils/colors.dart';
 import 'package:groom_admin/utils/input_text.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -150,29 +153,29 @@ class _FormSectionState extends State<_FormSection> {
                     }
                   }),
           const SizedBox(height: 30),
-          // Align(
-          //   alignment: Alignment.topRight,
-          //   child: Container(
-          //     margin: const EdgeInsets.only(right: 25),
-          //     child: SizedBox(
-          //       width: 154,
-          //       child: TextButton(
-          //           onPressed: () {
-          //             Navigator.push(
-          //                 context,
-          //                 MaterialPageRoute(
-          //                     builder: (builder) => ForgotPassword()));
-          //           },
-          //           child: Text(
-          //             "Forgot Password",
-          //             style: GoogleFonts.dmSans(
-          //                 color: black,
-          //                 fontSize: 14,
-          //                 fontWeight: FontWeight.bold),
-          //           )),
-          //     ),
-          //   ),
-          // ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Container(
+              margin: const EdgeInsets.only(right: 25),
+              child: SizedBox(
+                width: 154,
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (builder) => ForgotPassword()));
+                    },
+                    child: Text(
+                      "Forgot Password",
+                      style: GoogleFonts.dmSans(
+                          color: black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
+                    )),
+              ),
+            ),
+          ),
           const SizedBox(height: 20),
         ],
       ),
