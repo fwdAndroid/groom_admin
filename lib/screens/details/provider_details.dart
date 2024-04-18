@@ -4,9 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:groom_admin/screens/home_page.dart';
 import 'package:groom_admin/utils/buttons.dart';
 
-class CustomerDetails extends StatefulWidget {
+class ProviderDetails extends StatefulWidget {
   final uid, email, fullName, password, contactNumber;
-  CustomerDetails(
+  ProviderDetails(
       {super.key,
       required this.contactNumber,
       required this.email,
@@ -15,10 +15,10 @@ class CustomerDetails extends StatefulWidget {
       required this.uid});
 
   @override
-  State<CustomerDetails> createState() => _CustomerDetailsState();
+  State<ProviderDetails> createState() => _ProviderDetailsState();
 }
 
-class _CustomerDetailsState extends State<CustomerDetails> {
+class _ProviderDetailsState extends State<ProviderDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,7 +134,7 @@ class FormSectionState extends State<FormSection> {
                         barrierDismissible: false, // user must tap button!
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: const Text('Customer Detail'),
+                            title: const Text('Provider Detail'),
                             content: SingleChildScrollView(
                               child: ListBody(
                                 children: <Widget>[
@@ -153,7 +153,7 @@ class FormSectionState extends State<FormSection> {
                                 child: const Text('Yes'),
                                 onPressed: () async {
                                   await FirebaseFirestore.instance
-                                      .collection("customer")
+                                      .collection("provider")
                                       .doc(widget.uid)
                                       .delete();
 

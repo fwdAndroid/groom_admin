@@ -157,25 +157,22 @@ class _FormSectionState extends State<_FormSection> {
             padding: const EdgeInsets.all(8.0),
             child: Align(
               alignment: Alignment.center,
-              child: Container(
-                margin: const EdgeInsets.only(right: 25),
-                child: SizedBox(
-                  width: 154,
-                  child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (builder) => SignUpAccount()));
-                      },
-                      child: Text(
-                        "Create New Admin Account",
-                        style: GoogleFonts.dmSans(
-                            color: mainBtnColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
-                      )),
-                ),
+              child: SizedBox(
+                width: 400,
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (builder) => SignUpAccount()));
+                    },
+                    child: Text(
+                      "Create New Admin Account",
+                      style: GoogleFonts.dmSans(
+                          color: mainBtnColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
+                    )),
               ),
             ),
           ),
