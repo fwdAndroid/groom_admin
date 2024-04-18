@@ -74,17 +74,17 @@ class _ProviderScreenState extends State<ProviderScreen> {
                           documents[index].data() as Map<String, dynamic>;
                       return ListTile(
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (builder) => CustomerDetails(
-                          //               email: documentData['email'],
-                          //               fullName: documentData['fullName'],
-                          //               uid: documentData['uid'],
-                          //               contactNumber:
-                          //                   documentData['contactNumber'],
-                          //               password: documentData['password'],
-                          //             )));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (builder) => ProviderDetails(
+                                        email: documentData['email'],
+                                        fullName: documentData['fullName'],
+                                        uid: documentData['uid'],
+                                        contactNumber:
+                                            documentData['contactNumber'],
+                                        password: documentData['password'],
+                                      )));
                         },
                         title: Text(
                           documents[index]['fullName'],
