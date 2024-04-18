@@ -10,6 +10,10 @@ class ComplaintScreen extends StatefulWidget {
 class _ComplaintScreenState extends State<ComplaintScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Column(
+        children: [Text("Complaint Section Comming Soon")],
+      ),
+    );
   }
 }

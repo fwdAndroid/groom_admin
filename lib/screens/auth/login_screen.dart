@@ -169,7 +169,7 @@ class _FormSectionState extends State<_FormSection> {
                                 builder: (builder) => SignUpAccount()));
                       },
                       child: Text(
-                        "Create Account",
+                        "Create New Admin Account",
                         style: GoogleFonts.dmSans(
                             color: mainBtnColor,
                             fontSize: 14,
@@ -196,7 +196,7 @@ class _FormSectionState extends State<_FormSection> {
                     child: Text(
                       "Forgot Password",
                       style: GoogleFonts.dmSans(
-                          color: black,
+                          color: mainBtnColor,
                           fontSize: 14,
                           fontWeight: FontWeight.bold),
                     )),

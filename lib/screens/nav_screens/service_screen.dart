@@ -10,6 +10,10 @@ class ServiceScreen extends StatefulWidget {
 class _ServiceScreenState extends State<ServiceScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Column(
+        children: [Text("Services Section Comming Soon")],
+      ),
+    );
   }
 }
