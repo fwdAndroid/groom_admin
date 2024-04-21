@@ -1,8 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:groom_admin/screens/home_page.dart';
-import 'package:groom_admin/utils/buttons.dart';
 
 class ProviderDetails extends StatefulWidget {
   final uid, email, fullName, password, contactNumber;
@@ -123,60 +120,60 @@ class FormSectionState extends State<FormSection> {
               )
             ]),
             SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: SaveButton(
-                    onTap: () async {
-                      showDialog<void>(
-                        context: context,
-                        barrierDismissible: false, // user must tap button!
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Provider Detail'),
-                            content: SingleChildScrollView(
-                              child: ListBody(
-                                children: <Widget>[
-                                  Text("Email :" + widget.email),
-                                  Text("Name :" + widget.fullName),
-                                  Text(
-                                    "Do you want to remove user account permantely",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
-                            ),
-                            actions: <Widget>[
-                              TextButton(
-                                child: const Text('Yes'),
-                                onPressed: () async {
-                                  await FirebaseFirestore.instance
-                                      .collection("provider")
-                                      .doc(widget.uid)
-                                      .delete();
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Align(
+            //     alignment: Alignment.bottomCenter,
+            //     child: SaveButton(
+            //         onTap: () async {
+            //           showDialog<void>(
+            //             context: context,
+            //             barrierDismissible: false, // user must tap button!
+            //             builder: (BuildContext context) {
+            //               return AlertDialog(
+            //                 title: const Text('Provider Detail'),
+            //                 content: SingleChildScrollView(
+            //                   child: ListBody(
+            //                     children: <Widget>[
+            //                       Text("Email :" + widget.email),
+            //                       Text("Name :" + widget.fullName),
+            //                       Text(
+            //                         "Do you want to remove user account permantely",
+            //                         style:
+            //                             TextStyle(fontWeight: FontWeight.bold),
+            //                       )
+            //                     ],
+            //                   ),
+            //                 ),
+            //                 actions: <Widget>[
+            //                   TextButton(
+            //                     child: const Text('Yes'),
+            //                     onPressed: () async {
+            //                       await FirebaseFirestore.instance
+            //                           .collection("provider")
+            //                           .doc(widget.uid)
+            //                           .delete();
 
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (builder) => HomePage()));
-                                },
-                              ),
-                              TextButton(
-                                child: const Text('No'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    title: "Delete Account"),
-              ),
-            ),
+            //                       Navigator.pushReplacement(
+            //                           context,
+            //                           MaterialPageRoute(
+            //                               builder: (builder) => HomePage()));
+            //                     },
+            //                   ),
+            //                   TextButton(
+            //                     child: const Text('No'),
+            //                     onPressed: () {
+            //                       Navigator.of(context).pop();
+            //                     },
+            //                   ),
+            //                 ],
+            //               );
+            //             },
+            //           );
+            //         },
+            //         title: "Delete Account"),
+            //   ),
+            // ),
             SizedBox(height: 10),
           ])),
     );

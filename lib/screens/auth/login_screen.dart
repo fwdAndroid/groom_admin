@@ -153,29 +153,6 @@ class _FormSectionState extends State<_FormSection> {
                       }
                     }
                   }),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Align(
-              alignment: Alignment.center,
-              child: SizedBox(
-                width: 400,
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (builder) => SignUpAccount()));
-                    },
-                    child: Text(
-                      "Create New Admin Account",
-                      style: GoogleFonts.dmSans(
-                          color: mainBtnColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold),
-                    )),
-              ),
-            ),
-          ),
           const SizedBox(height: 30),
           Align(
             alignment: Alignment.topRight,

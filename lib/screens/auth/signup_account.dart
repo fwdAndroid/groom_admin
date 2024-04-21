@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:groom_admin/database/auth_methods.dart';
 import 'package:groom_admin/screens/auth/login_screen.dart';
-import 'package:groom_admin/screens/home_page.dart';
 import 'package:groom_admin/utils/app_colors.dart';
 import 'package:groom_admin/utils/app_style.dart';
 import 'package:groom_admin/utils/buttons.dart';
-import 'package:groom_admin/utils/colors.dart';
 import 'package:groom_admin/utils/input_text.dart';
 
 class SignUpAccount extends StatelessWidget {
@@ -61,7 +58,7 @@ class _FormSectionState extends State<_FormSection> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            "Sign Up",
+            "Create New Account",
             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25.63),
           ),
           const SizedBox(height: 41),
@@ -172,48 +169,13 @@ class _FormSectionState extends State<_FormSection> {
                       ScaffoldMessenger.of(context)
                           .showSnackBar(SnackBar(content: Text(res)));
                     } else {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (builder) => HomePage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (builder) => SignInPage()));
                     }
                   }),
           const SizedBox(height: 30),
-          InkWell(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (builder) => SignInPage()));
-            },
-            child: Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'Already have an account? ',
-                    style: GoogleFonts.dmSans(
-                      color: black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  TextSpan(
-                    text: 'Sign I',
-                    style: GoogleFonts.dmSans(
-                      color: black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  TextSpan(
-                    text: 'n\n',
-                    style: GoogleFonts.dmSans(
-                      color: black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
         ],
       ),
     );
