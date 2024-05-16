@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:groom_admin/database/auth_methods.dart';
+import 'package:groom_admin/model/user_model.dart';
 import 'package:groom_admin/screens/auth/forgot_password.dart';
-import 'package:groom_admin/screens/auth/signup_account.dart';
 import 'package:groom_admin/screens/home_page.dart';
 import 'package:groom_admin/utils/app_colors.dart';
 import 'package:groom_admin/utils/app_style.dart';
@@ -11,7 +11,7 @@ import 'package:groom_admin/utils/input_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +49,42 @@ class _FormSectionState extends State<_FormSection> {
   void initState() {
     super.initState();
     passwordVisible = true;
+  }
+
+  Future<void> signIn() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    String res = await AuthMethods().loginUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (res == 'success') {
+      // Check if the user exists in the admin collection
+      UserModel user = await AuthMethods().getUserDetails();
+      if (user.isAdmin) {
+        // User is an admin, navigate to the home page
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      } else {
+        // User is not an admin, show an error message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text('You are not authorized to access this website.')),
+        );
+      }
+    } else {
+      // Show error message returned from the authentication method
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res)));
+    }
   }
 
   @override
@@ -124,35 +160,8 @@ class _FormSectionState extends State<_FormSection> {
               ? CircularProgressIndicator()
               : SaveButton(
                   title: "Login",
-                  onTap: () async {
-                    if (_emailController.text.isEmpty ||
-                        _passwordController.text.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("Email or Password is Required")));
-                    } else {
-                      setState(() {
-                        _isLoading = true;
-                      });
-
-                      String res = await AuthMethods().loginUpUser(
-                        email: _emailController.text,
-                        pass: _passwordController.text,
-                      );
-
-                      setState(() {
-                        _isLoading = false;
-                      });
-                      if (res != 'sucess') {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text(res)));
-                      } else {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (builder) => HomePage()));
-                      }
-                    }
-                  }),
+                  onTap: signIn,
+                ),
           const SizedBox(height: 30),
           Align(
             alignment: Alignment.topRight,
@@ -161,19 +170,20 @@ class _FormSectionState extends State<_FormSection> {
               child: SizedBox(
                 width: 154,
                 child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (builder) => ForgotPassword()));
-                    },
-                    child: Text(
-                      "Forgot Password",
-                      style: GoogleFonts.dmSans(
-                          color: mainBtnColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold),
-                    )),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => ForgotPassword()));
+                  },
+                  child: Text(
+                    "Forgot Password",
+                    style: GoogleFonts.dmSans(
+                        color: mainBtnColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ),
           ),
@@ -195,10 +205,11 @@ class _ImageSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-              child: Image.asset(
-            "assets/logo.png",
-            height: 300,
-          ))
+            child: Image.asset(
+              "assets/logo.png",
+              height: 300,
+            ),
+          ),
         ],
       ),
     );

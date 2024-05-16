@@ -6,21 +6,25 @@ class UserModel {
   String firstName;
   String confrimPassword;
   String password;
+  bool isAdmin; // New attribute
 
-  UserModel(
-      {required this.uid,
-      required this.email,
-      required this.password,
-      required this.confrimPassword,
-      required this.firstName});
+  UserModel({
+    required this.uid,
+    required this.email,
+    required this.password,
+    required this.confrimPassword,
+    required this.firstName,
+    required this.isAdmin, // New attribute
+  });
 
-  ///Converting OBject into Json Object
+  ///Converting Object into Json Object
   Map<String, dynamic> toJson() => {
         'firstName': firstName,
         'uid': uid,
         'password': password,
         'email': email,
-        'confrimPassword': confrimPassword
+        'confrimPassword': confrimPassword,
+        'isAdmin': true, // Include isAdmin in JSON
       };
 
   ///
@@ -33,6 +37,8 @@ class UserModel {
       password: snapshot['password'],
       email: snapshot['email'],
       confrimPassword: snapshot['confrimPassword'],
+      isAdmin: snapshot['isAdmin'] ??
+          true, // Set isAdmin, default to false if not present
     );
   }
 }

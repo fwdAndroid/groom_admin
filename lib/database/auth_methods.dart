@@ -6,71 +6,86 @@ class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-//Get Users Details
   Future<UserModel> getUserDetails() async {
-    User currentUser = _auth.currentUser!;
-    DocumentSnapshot documentSnapshot =
-        await firebaseFirestore.collection('users').doc(currentUser.uid).get();
-    return UserModel.fromSnap(documentSnapshot);
+    User? currentUser = _auth.currentUser;
+    if (currentUser != null) {
+      DocumentSnapshot documentSnapshot = await firebaseFirestore
+          .collection('admin')
+          .doc(currentUser.uid)
+          .get();
+      return UserModel.fromSnap(documentSnapshot);
+    } else {
+      throw Exception("User not logged in.");
+    }
   }
 
-  // Register User with Add User
   Future<String> signUpUser({
     required String email,
-    required String confrimPassword,
+    required String confirmPassword,
     required String firstName,
     required String password,
   }) async {
-    String res = 'Some error occured';
     try {
-      if (email.isNotEmpty ||
-          password.isNotEmpty ||
-          confrimPassword.isNotEmpty ||
-          firstName.isNotEmpty) {
-        UserCredential cred = await _auth.createUserWithEmailAndPassword(
-            email: email, password: password);
+      UserCredential cred = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
-        //Add User to the database with modal
-        UserModel userModel = UserModel(
-            firstName: firstName,
-            uid: cred.user!.uid,
-            email: email,
-            password: password,
-            confrimPassword: confrimPassword);
-        await firebaseFirestore
-            .collection('users')
-            .doc(cred.user!.uid)
-            .set(userModel.toJson());
-        res = 'sucess';
-      }
+      UserModel userModel = UserModel(
+        firstName: firstName,
+        uid: cred.user!.uid,
+        email: email,
+        password: password,
+        confrimPassword: confirmPassword,
+        isAdmin: false, // Set isAdmin to false for regular sign-up
+      );
+
+      await firebaseFirestore
+          .collection('admin')
+          .doc(cred.user!.uid)
+          .set(userModel.toJson());
+      return 'success';
     } catch (e) {
-      res = e.toString();
+      return e.toString();
     }
-    return res;
   }
 
-  ///Login User with Add Useer
-  Future<String> loginUpUser({
+  Future<String> loginUser({
     required String email,
-    required String pass,
+    required String password,
   }) async {
-    String res = 'Some error occured';
     try {
-      if (email.isNotEmpty || pass.isNotEmpty) {
-        await _auth.signInWithEmailAndPassword(email: email, password: pass);
+      // Authenticate user
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
-        res = 'sucess';
+      // Check if the authenticated user's UID is in the admin collection
+      DocumentSnapshot snapshot = await firebaseFirestore
+          .collection('admin')
+          .doc(userCredential.user!.uid)
+          .get();
+      if (snapshot.exists) {
+        // User is an admin, allow login
+        return 'success';
+      } else {
+        // User is not an admin, deny login
+        await _auth.signOut(); // Sign out the user
+        return 'You are not authorized to access this account.';
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return 'User not found.';
+      } else if (e.code == 'wrong-password') {
+        return 'Wrong password provided for this user.';
+      } else {
+        return 'Firebase Authentication Error: ${e.message}';
       }
     } on FirebaseException catch (e) {
-      if (e == 'WrongEmail') {
-        print(e.message);
-      }
-      if (e == 'WrongPassword') {
-        print(e.message);
-      }
+      return 'Firebase Error: ${e.message}';
     } catch (e) {
-      res = e.toString();
+      return 'Unexpected Error: $e';
     }
-    return res;
   }
 }

@@ -158,7 +158,7 @@ class _FormSectionState extends State<_FormSection> {
                     String res = await AuthMethods().signUpUser(
                       email: _emailController.text,
                       password: _passwordController.text,
-                      confrimPassword: _passwordController.text,
+                      confirmPassword: _passwordController.text,
                       firstName: _nameController.text,
                     );
 
@@ -168,6 +168,10 @@ class _FormSectionState extends State<_FormSection> {
                     if (res != 'sucess') {
                       ScaffoldMessenger.of(context)
                           .showSnackBar(SnackBar(content: Text(res)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (builder) => SignInPage()));
                     } else {
                       Navigator.push(
                           context,

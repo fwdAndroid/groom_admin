@@ -152,7 +152,7 @@ class _MobileSignUpAccountState extends State<MobileSignUpAccount> {
                         String res = await AuthMethods().signUpUser(
                           email: _emailController.text,
                           password: _passwordController.text,
-                          confrimPassword: _passwordController.text,
+                          confirmPassword: _passwordController.text,
                           firstName: _nameController.text,
                         );
 

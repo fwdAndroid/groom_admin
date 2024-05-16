@@ -105,9 +105,9 @@ class _MobileSignInState extends State<MobileSignIn> {
                           _isLoading = true;
                         });
 
-                        String res = await AuthMethods().loginUpUser(
+                        String res = await AuthMethods().loginUser(
                           email: _emailController.text,
-                          pass: _passwordController.text,
+                          password: _passwordController.text,
                         );
 
                         setState(() {
