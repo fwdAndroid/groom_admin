@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:groom_admin/screens/auth/login_screen.dart';
 import 'package:groom_admin/screens/nav_screens/admin_account_screen.dart';
+import 'package:groom_admin/screens/nav_screens/block_screen.dart';
 import 'package:groom_admin/screens/nav_screens/complaint_screen.dart';
 import 'package:groom_admin/screens/nav_screens/customer_screen.dart';
 import 'package:groom_admin/screens/nav_screens/payment_screen.dart';
@@ -131,6 +132,10 @@ class ExampleSidebarX extends StatelessWidget {
           label: 'Complaint',
         ),
         SidebarXItem(
+          icon: Icons.block,
+          label: 'Block Users',
+        ),
+        SidebarXItem(
           icon: Icons.payment,
           label: 'Payments',
         ),
@@ -171,10 +176,12 @@ class _ScreensExample extends StatelessWidget {
           case 3:
             return const ComplaintScreen();
           case 4:
-            return const PaymentScreen();
+            return const BlockScreen();
           case 5:
-            return const AdminAccountScreen();
+            return const PaymentScreen();
           case 6:
+            return const AdminAccountScreen();
+          case 7:
             return AlertDialog(
               title: const Text('Logout Alert'),
               content: SingleChildScrollView(
