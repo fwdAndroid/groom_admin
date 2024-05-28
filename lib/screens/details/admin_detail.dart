@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:groom_admin/screens/home_page.dart';
 import 'package:groom_admin/utils/buttons.dart';
+import 'package:groom_admin/utils/colors.dart';
 
 class AdminAccountDetail extends StatefulWidget {
   final uid, email, firstName, password, confrimPassword;
@@ -128,6 +129,7 @@ class FormSectionState extends State<FormSection> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: SaveButton(
+                    color: mainBtnColor,
                     onTap: () async {
                       showDialog<void>(
                         context: context,

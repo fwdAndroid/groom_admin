@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:groom_admin/mobile/mobile_auh/mobile_sign_in.dart';
 import 'package:groom_admin/utils/buttons.dart';
+import 'package:groom_admin/utils/colors.dart';
 import 'package:groom_admin/utils/input_text.dart';
 
 class MobileForgotPassword extends StatefulWidget {
@@ -53,6 +54,7 @@ class _MobileForgotPasswordState extends State<MobileForgotPassword> {
             _isLoading
                 ? CircularProgressIndicator()
                 : SaveButton(
+                    color: mainBtnColor,
                     title: "Send",
                     onTap: () async {
                       if (_passwordController.text.isEmpty) {

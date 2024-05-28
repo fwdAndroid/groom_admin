@@ -191,6 +191,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: SaveButton(
+                                      color: mainBtnColor,
                                       onTap: () {
                                         Navigator.push(
                                             context,

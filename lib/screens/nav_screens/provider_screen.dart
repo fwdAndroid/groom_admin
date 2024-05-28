@@ -54,6 +54,7 @@ class _ProviderScreenState extends State<ProviderScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (builder) => ProviderDetails(
+                                      blocked: documentData['isblocked'],
                                       email: documentData['email'],
                                       fullName: documentData['fullName'],
                                       uid: documentData['uid'],
@@ -170,12 +171,15 @@ class _ProviderScreenState extends State<ProviderScreen> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: SaveButton(
+                                    color: mainBtnColor,
                                     onTap: () {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (builder) =>
                                                   ProviderDetails(
+                                                    blocked: documentData[
+                                                        'isblocked'],
                                                     email:
                                                         documentData['email'],
                                                     fullName: documentData[

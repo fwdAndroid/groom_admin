@@ -94,6 +94,7 @@ class _MobileSignInState extends State<MobileSignIn> {
             _isLoading
                 ? CircularProgressIndicator()
                 : SaveButton(
+                    color: mainBtnColor,
                     title: "Login",
                     onTap: () async {
                       if (_emailController.text.isEmpty ||

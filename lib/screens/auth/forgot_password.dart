@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:groom_admin/screens/auth/login_screen.dart';
 import 'package:groom_admin/utils/app_colors.dart';
 import 'package:groom_admin/utils/buttons.dart';
+import 'package:groom_admin/utils/colors.dart';
 import 'package:groom_admin/utils/input_text.dart';
 
 class ForgotPassword extends StatelessWidget {
@@ -74,6 +75,7 @@ class _FormSectionState extends State<_FormSection> {
           _isLoading
               ? CircularProgressIndicator()
               : SaveButton(
+                  color: mainBtnColor,
                   title: "Send",
                   onTap: () async {
                     if (_passwordController.text.isEmpty) {

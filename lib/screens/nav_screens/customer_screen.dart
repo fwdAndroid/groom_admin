@@ -83,6 +83,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                   builder: (builder) => ProviderDetails(
                                         email: documentData['email'],
                                         fullName: documentData['fullName'],
+                                        blocked: documentData['isblocked'],
                                         uid: documentData['uid'],
                                         contactNumber:
                                             documentData['contactNumber'],
@@ -199,12 +200,15 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: SaveButton(
+                                      color: mainBtnColor,
                                       onTap: () {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (builder) =>
                                                     ProviderDetails(
+                                                      blocked: documentData[
+                                                          'isblocked'],
                                                       email:
                                                           documentData['email'],
                                                       fullName: documentData[

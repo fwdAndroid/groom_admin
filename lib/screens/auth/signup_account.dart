@@ -4,6 +4,7 @@ import 'package:groom_admin/screens/auth/login_screen.dart';
 import 'package:groom_admin/utils/app_colors.dart';
 import 'package:groom_admin/utils/app_style.dart';
 import 'package:groom_admin/utils/buttons.dart';
+import 'package:groom_admin/utils/colors.dart';
 import 'package:groom_admin/utils/input_text.dart';
 
 class SignUpAccount extends StatelessWidget {
@@ -139,6 +140,7 @@ class _FormSectionState extends State<_FormSection> {
           _isLoading
               ? CircularProgressIndicator()
               : SaveButton(
+                  color: mainBtnColor,
                   title: "Continue",
                   onTap: () async {
                     if (_nameController.text.isEmpty) {

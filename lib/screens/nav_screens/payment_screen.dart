@@ -200,6 +200,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: SaveButton(
+                                      color: mainBtnColor,
                                       onTap: () {
                                         Navigator.push(
                                             context,

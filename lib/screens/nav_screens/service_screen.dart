@@ -195,6 +195,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: SaveButton(
+                                      color: mainBtnColor,
                                       onTap: () {
                                         Navigator.push(
                                             context,

@@ -159,6 +159,7 @@ class _FormSectionState extends State<_FormSection> {
           _isLoading
               ? CircularProgressIndicator()
               : SaveButton(
+                  color: mainBtnColor,
                   title: "Login",
                   onTap: signIn,
                 ),

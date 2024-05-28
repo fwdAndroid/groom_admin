@@ -134,6 +134,7 @@ class _MobileSignUpAccountState extends State<MobileSignUpAccount> {
               _isLoading
                   ? CircularProgressIndicator()
                   : SaveButton(
+                      color: mainBtnColor,
                       title: "Continue",
                       onTap: () async {
                         if (_nameController.text.isEmpty) {
