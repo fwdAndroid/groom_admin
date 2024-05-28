@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:groom_admin/screens/details/provider_details.dart';
 import 'package:groom_admin/screens/details/service_price_detail.dart';
 import 'package:groom_admin/utils/buttons.dart';
 import 'package:groom_admin/utils/colors.dart';
@@ -53,7 +52,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ? StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection("booking")
-                  .where("bookingStatus", isEqualTo: "start")
+                  .where("bookingStatus", isEqualTo: "completed")
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -104,7 +103,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           : StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("booking")
-                  .where("bookingStatus", isEqualTo: "start")
+                  .where("bookingStatus", isEqualTo: "completed")
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
