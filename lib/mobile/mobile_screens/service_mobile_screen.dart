@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:groom_admin/utils/colors.dart';
+import 'package:groom_admin/mobile/mobile_detail/provider_mobile_detail.dart';
+import 'package:groom_admin/mobile/mobile_detail/service_mobile_detail.dart';
 
 class ServiceMobileScreen extends StatefulWidget {
   const ServiceMobileScreen({super.key});
@@ -9,22 +11,164 @@ class ServiceMobileScreen extends StatefulWidget {
 }
 
 class _ServiceMobileScreenState extends State<ServiceMobileScreen> {
+  TextEditingController controller = TextEditingController();
+  bool isShowUser = false;
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: mainBtnColor,
-        title: Text(
-          "Services",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [Center(child: Text("Services Section Comming Soon"))],
-      ),
+          leading: Image.asset("assets/logo.png"),
+          elevation: 0,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    isShowUser = true;
+                  });
+                },
+                icon: Icon(Icons.search))
+          ],
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          title: TextFormField(
+            controller: controller,
+            decoration: InputDecoration(label: Text('Search By Name')),
+            onFieldSubmitted: (_) {
+              setState(() {
+                isShowUser = true;
+              });
+            },
+          )),
+      body: isShowUser
+          ? StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection("services").snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Text('Loading...');
+                }
+
+                List<DocumentSnapshot> documents = snapshot.data!.docs;
+                return Container(
+                  height: 400,
+                  child: ListView.builder(
+                    itemCount: documents.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var documentData =
+                          documents[index].data() as Map<String, dynamic>;
+                      return ListTile(
+                        onTap: () {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (builder) => ServiceMobileDetail(
+                          //               contactNumber:
+                          //                   documentData['contactNumber'],
+                          //               password: documentData['password'],
+                          //               email: documentData['email'],
+                          //               uid: documentData['uid'],
+                          //               fullName: documentData['fullName'],
+                          //               photo: documentData['photoURL'],
+                          //             )));
+                        },
+                        title: Text(
+                          documents[index]['fullName'],
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        subtitle: Text(
+                          documents[index]['email'],
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            )
+          : StreamBuilder(
+              stream:
+                  FirebaseFirestore.instance.collection("services").snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+
+                var data = snapshot.data!.docs;
+                if (data.isEmpty) {
+                  // No records found
+                  return Center(
+                    child: Text('No Records Found'),
+                  );
+                }
+                return LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    // Calculate the number of columns based on available width
+
+                    return ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        var documentData =
+                            data[index].data() as Map<String, dynamic>;
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)),
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      documentData['serviceImage']),
+                                ),
+                                trailing: TextButton(
+                                  child: const Text('View'),
+                                  onPressed: () async {
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (builder) =>
+                                    //             ServiceMobileDetail(
+                                    //               contactNumber: documentData[
+                                    //                   'contactNumber'],
+                                    //               password:
+                                    //                   documentData['password'],
+                                    //               email: documentData['email'],
+                                    //               uid: documentData['uid'],
+                                    //               fullName:
+                                    //                   documentData['fullName'],
+                                    //               photo:
+                                    //                   documentData['photoURL'],
+                                    //             )));
+                                  },
+                                ),
+                                title: Text(
+                                    "Service: " + documentData['serviceName']),
+                                subtitle: Text("Category: " +
+                                    documentData['serviceCategory']),
+                              )),
+                        );
+                      },
+                    );
+                  },
+                );
+              }),
     );
   }
 }

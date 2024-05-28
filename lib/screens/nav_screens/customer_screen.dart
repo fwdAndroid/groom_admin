@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:groom_admin/screens/details/customer_details.dart';
+import 'package:groom_admin/screens/details/provider_details.dart';
 import 'package:groom_admin/utils/buttons.dart';
 import 'package:groom_admin/utils/colors.dart';
 
@@ -53,7 +53,8 @@ class _CustomerScreenState extends State<CustomerScreen> {
       body: isShowUser
           ? StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
-                  .collection("customer")
+                  .collection("users")
+                  .where("role", isEqualTo: "UserRole.Customer")
                   .where("fullName", isGreaterThanOrEqualTo: controller.text)
                   .snapshots(),
               builder: (BuildContext context,
@@ -79,7 +80,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (builder) => CustomerDetails(
+                                  builder: (builder) => ProviderDetails(
                                         email: documentData['email'],
                                         fullName: documentData['fullName'],
                                         uid: documentData['uid'],
@@ -103,8 +104,10 @@ class _CustomerScreenState extends State<CustomerScreen> {
               },
             )
           : StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection("customer").snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection("users")
+                  .where("role", isEqualTo: "UserRole.Customer")
+                  .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
@@ -119,13 +122,14 @@ class _CustomerScreenState extends State<CustomerScreen> {
                 if (data.isEmpty) {
                   // No records found
                   return Center(
-                    child: Text('Currently No User Available in Our System'),
+                    child:
+                        Text('Currently No Provider Available in Our System'),
                   );
                 }
                 return LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
                     // Calculate the number of columns based on available width
-                    int columns = (constraints.maxWidth / 250)
+                    int columns = (constraints.maxWidth / 300)
                         .floor(); // Assuming each item has a width of 200
 
                     return GridView.builder(
@@ -149,62 +153,30 @@ class _CustomerScreenState extends State<CustomerScreen> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      "Email: ",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                  child: CircleAvatar(
+                                    radius: 40,
+                                    backgroundImage:
+                                        NetworkImage(documentData['photoURL']),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, right: 8),
-                                  child: Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      documentData['email'],
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 7,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      "Name: ",
+                                      "Email: " + documentData['email'],
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, right: 8),
-                                  child: Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      documentData['fullName'],
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 7,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      "Mobile: ",
+                                      "Name: " + documentData['fullName'],
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
@@ -212,18 +184,17 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, right: 8),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      documentData['contactNumber'],
-                                      style: TextStyle(color: Colors.white),
+                                      "Mobile: " +
+                                          documentData['contactNumber'],
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 5,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -233,7 +204,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (builder) =>
-                                                    CustomerDetails(
+                                                    ProviderDetails(
                                                       email:
                                                           documentData['email'],
                                                       fullName: documentData[

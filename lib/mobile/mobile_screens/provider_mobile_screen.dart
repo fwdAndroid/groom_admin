@@ -49,7 +49,8 @@ class _ProviderMobileScreenState extends State<ProviderMobileScreen> {
       body: isShowUser
           ? StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
-                  .collection("provider")
+                  .collection("users")
+                  .where("role", isEqualTo: "UserRole.Provider")
                   .where("fullName", isGreaterThanOrEqualTo: controller.text)
                   .snapshots(),
               builder: (BuildContext context,
@@ -100,8 +101,10 @@ class _ProviderMobileScreenState extends State<ProviderMobileScreen> {
               },
             )
           : StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection("provider").snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection("users")
+                  .where("role", isEqualTo: "UserRole.Provider")
+                  .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {

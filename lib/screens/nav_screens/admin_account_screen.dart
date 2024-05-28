@@ -58,7 +58,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
       body: isShowUser
           ? StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
-                  .collection("users")
+                  .collection("admin")
                   .where("firstName", isGreaterThanOrEqualTo: controller.text)
                   .snapshots(),
               builder: (BuildContext context,
@@ -109,7 +109,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
             )
           : StreamBuilder(
               stream:
-                  FirebaseFirestore.instance.collection("users").snapshots(),
+                  FirebaseFirestore.instance.collection("admin").snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {

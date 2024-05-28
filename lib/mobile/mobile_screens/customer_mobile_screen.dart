@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:groom_admin/mobile/mobile_detail/customer_mobile_detail.dart';
+import 'package:groom_admin/mobile/mobile_detail/provider_mobile_detail.dart';
 
 class CustomerMobileScreen extends StatefulWidget {
   const CustomerMobileScreen({super.key});
@@ -49,7 +50,8 @@ class _CustomerMobileScreenState extends State<CustomerMobileScreen> {
       body: isShowUser
           ? StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
-                  .collection("customer")
+                  .collection("users")
+                  .where("role", isEqualTo: "UserRole.Customer")
                   .where("fullName", isGreaterThanOrEqualTo: controller.text)
                   .snapshots(),
               builder: (BuildContext context,
@@ -99,8 +101,10 @@ class _CustomerMobileScreenState extends State<CustomerMobileScreen> {
               },
             )
           : StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection("customer").snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection("users")
+                  .where("role", isEqualTo: "UserRole.Customer")
+                  .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
@@ -133,6 +137,10 @@ class _CustomerMobileScreenState extends State<CustomerMobileScreen> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)),
                               child: ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage(documentData['photoURL']),
+                                ),
                                 trailing: TextButton(
                                   child: const Text('View'),
                                   onPressed: () async {
@@ -140,7 +148,7 @@ class _CustomerMobileScreenState extends State<CustomerMobileScreen> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (builder) =>
-                                                MobileCustomerDetail(
+                                                MobileProviderDetail(
                                                   contactNumber: documentData[
                                                       'contactNumber'],
                                                   password:
@@ -149,6 +157,8 @@ class _CustomerMobileScreenState extends State<CustomerMobileScreen> {
                                                   uid: documentData['uid'],
                                                   fullName:
                                                       documentData['fullName'],
+                                                  photo:
+                                                      documentData['photoURL'],
                                                 )));
                                   },
                                 ),
